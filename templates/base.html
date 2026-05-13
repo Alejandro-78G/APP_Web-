@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ settings.APP_TITLE if settings else "Jose Alejandro Cristancho | Data Analyst Portfolio" }}</title>
+    
+    <!-- Google Fonts: Inter (Sans) and JetBrains Mono (Mono) -->
+    <!-- Google Fonts: Syne (Headings), Outfit (Sans), and JetBrains Mono (Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- GitSpec Design System (Base CSS) -->
+    <style>
+        :root {
+            /* Color Palette — Inspirado en terminales y editores de código */
+            --bg-primary:    #0d1117;       /* GitHub Dark background */
+            --bg-secondary:  #161b22;       /* Cards, surfaces */
+            --bg-tertiary:   #21262d;       /* Hover states */
+            --border:        #30363d;       /* Bordes sutiles */
+            --text-primary:  #e6edf3;       /* Texto principal */
+            --text-secondary:#8b949e;       /* Texto secundario */
+            --accent-green:  #3fb950;       /* Éxito, commits */
+            --accent-blue:   #58a6ff;       /* Links, CTAs */
+            --accent-purple: #bc8cff;       /* Badges, tags */
+            --accent-orange: #f0883e;       /* Warnings, highlights */
+            --accent-red:    #f85149;       /* Errors */
+
+            /* Typography */
+            --font-mono:   'JetBrains Mono', 'Fira Code', monospace;
+            --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+            /* Spacing Scale */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 50% -20%, var(--accent-glow), transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-attachment: fixed;
+        }
+
+        /* Nav Bar GitSpec Style */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-md) var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .logo::before {
+            content: "~/";
+            color: var(--accent-purple);
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-left: var(--space-lg);
+            transition: color var(--transition-fast);
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            padding: var(--space-2xl) var(--space-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Footer GitSpec Style */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: var(--space-xl);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        footer p {
+            font-family: var(--font-mono);
+        }
+
+        /* Typography Utilities */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+            letter-spacing: -0.02em;
+        }
+
+        .text-accent {
+            color: var(--accent-blue);
+        }
+        
+        .font-mono {
+            font-family: var(--font-mono);
+        }
+
+        /* Global Cards - Glassmorphism */
+        .gitspec-card {
+            background: rgba(10, 18, 25, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all var(--transition-base);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gitspec-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            background: rgba(18, 29, 39, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+    </style>
+    <!-- Placeholder for specific page CSS -->
+    <!-- Prism.js for syntax highlighting in GitSpec Dark style -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">
+            <img src="/static/images/icons/jagc-logo.png" alt="JAGC Logo" style="height: 28px; width: auto; border-radius: 4px;">
+            <span style="display: none;">portfolio</span>
+        </a>
+        <nav>
+            <a href="/#projects">Proyectos</a>
+            <a href="/#contact">Contacto</a>
+            <a href="https://github.com/Alejandro-78G" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Child templates will inject content here -->
+        {% endblock %}
+    </main>
+
+    <footer id="contact">
+        <div style="max-width: 800px; margin: 0 auto; padding-bottom: var(--space-xl);">
+            <h3 style="margin-bottom: var(--space-md);">¿Hablamos?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);">Actualmente estoy buscando nuevas oportunidades. Si tienes una pregunta o simplemente quieres saludar, ¡mi bandeja de entrada está abierta!</p>
+            
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-xl); margin-bottom: var(--space-2xl);">
+                <a href="mailto:josegaona005@gmail.com" class="github-btn" style="border-color: var(--accent-blue);">
+                    <i data-lucide="mail"></i> josegaona005@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/jos%C3%A9-alejandro-gaona-cristancho-a49136355/" target="_blank" class="github-btn" style="border-color: var(--accent-purple);">
+                    <i data-lucide="linkedin"></i> LinkedIn
+                </a>
+                <a href="tel:+573229452956" class="github-btn" style="border-color: var(--accent-green);">
+                    <i data-lucide="phone"></i> +57 322 945 2956
+                </a>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border); padding-top: var(--space-xl); font-family: var(--font-mono); font-size: 0.85rem;">
+            <p>Jose Alejandro Cristancho Gaona &copy; 2026</p>
+            <p style="color: var(--text-secondary); margin-top: 4px;">Built with FastAPI & Premium Design System</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    
+    <!-- Main JS -->
+    <script src="/static/js/main.js"></script>
+
+    <!-- Placeholder for specific page JS -->
+    {% block scripts %}{% endblock %}
+</body>
+</html>

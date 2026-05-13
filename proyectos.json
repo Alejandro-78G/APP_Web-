@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "author": "Alejandro Cristancho",
+    "role": "Junior Data Analyst",
+    "last_updated": "2026-05-06"
+  },
+  "projects": [
+    {
+      "id": "vacantes-colombia",
+      "titulo": "Análisis de vacantes laborales en Colombia",
+      "descripcion": "Pipeline ETL de extremo a extremo para extraer, transformar y visualizar datos de vacantes laborales en Colombia.",
+      "github_repo": "Alejandro-78G/analisis-brecha-laboral-colombia",
+      "thumbnail": "/static/images/projects/vacantes-colombia.png",
+      "stack_tecnico": [
+        "Python",
+        "SQL",
+        "Power BI",
+        "Pandas",
+        "PostgreSQL"
+      ],
+      "powerbi_embed_url": "https://app.powerbi.com/view?r=eyJrIjoiMWRkNjE4NzYtN2I0Yy00MTE1LWJmMmUtNmFhYzhlNmVlYjVmIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9",
+      "bloques": {
+        "problema": "La información sobre ofertas laborales en Colombia está dispersa en múltiples plataformas y formatos inconsistentes, lo que impide un análisis unificado de la demanda. Por ejemplo, al intentar consolidar datos de portales como <i>LinkedIn</i> y <i>El Empleo</i>, se identificó que una misma ubicación geográfica puede aparecer registrada de más de cinco formas distintas (ej. 'Bogotá D.C', 'Bogota-Cundinamarca', 'BOG'). Además, las estrictas políticas anti-scraping de redes profesionales bloquean el acceso a datos granulares, obligando a los analistas a lidiar con estructuras de datos incompletas y 'ruido digital' que sesga los indicadores de empleabilidad juvenil.",
+        "proceso": "1. Extracción de datos (Web Scraping / APIs). 2. Limpieza con Pandas. 3. Carga en PostgreSQL. 4. Dashboard interactivo.",
+        "hallazgos": "El análisis revela una brecha crítica en la empleabilidad nacional: actualmente existe una oferta de apenas 1 vacante por cada 2,868 graduados. Esta desproporción subraya la necesidad urgente de fortalecer la creación de empleo formal y alinear la formación académica con las demandas reales del mercado laboral en las principales ciudades.",
+        "implementacion_lista": [
+          {
+            "titulo": "Extracción Automatizada y Normalización de Datos (Python & Cloud)",
+            "imagen": "/static/images/code/Desempleo/Normalizar_municio.png",
+            "descripcion": "Implementación de un motor de extracción dinámica utilizando <strong>Selenium</strong> para el monitoreo de vacantes laborales en tiempo real. El sistema integra una capa de <strong>procesamiento de lenguaje natural (NLP)</strong> básico mediante <code>unicodedata</code> para la normalización de entidades geográficas, eliminando ruidos y duplicados tipográficos (ej. 'Bogotá' vs 'Bogota D.C') para asegurar la integridad de los reportes en Power BI. Finalmente, el pipeline automatiza la carga hacia <strong>Google BigQuery</strong>, gestionando grandes volúmenes de datos bajo una política de actualización diaria (<code>WRITE_TRUNCATE</code>) que garantiza información fresca para el análisis de toma de decisiones."
+          },
+          {
+            "titulo": "Automatización de Extracción con Selenium (Web Scraping)",
+            "imagen": "/static/images/code/Desempleo/selemium.png",
+            "descripcion": "Desarrollo de un motor de recolección de datos automatizado utilizando <strong>Selenium WebDriver</strong>. El script está diseñado para la navegación dinámica en portales de empleo, implementando una configuración en modo <i>headless</i> y agentes de usuario personalizados para optimizar el rendimiento y garantizar la estabilidad de la extracción. Esta solución permite capturar información de múltiples cargos de forma simultánea, transformando datos no estructurados de la web en datasets limpios listos para su integración en BigQuery."
+          },
+          {
+            "titulo": "Extracción de Datos y Superación de Barreras Anti-Bot",
+            "imagen": "/static/images/code/Desempleo/Buscar_empleo.png",
+            "descripcion": "Desarrollo de un motor de búsqueda automatizada en Python utilizando <strong>Selenium</strong> para capturar vacantes de empleo en tiempo real. Durante el desarrollo, se enfrentó el desafío técnico de las estrictas políticas anti-scraping de plataformas como <strong>LinkedIn</strong>, lo que llevó a pivotar la estrategia hacia portales como <i>El Empleo</i> para asegurar un flujo constante de datos sin bloqueos. El script final utiliza <code>headless mode</code> y agentes de usuario personalizados para navegar hasta 10 páginas por cargo, recolectando datos clave que luego son normalizados para su análisis geográfico en Power BI."
+          },
+          {
+            "titulo": "Integración y Carga de Datos en Google BigQuery",
+            "imagen": "/static/images/code/Desempleo/Bigquery.png",
+            "descripcion": "Implementación de una capa de persistencia en la nube utilizando el SDK de <strong>Google Cloud</strong> para automatizar la carga de datasets procesados. El módulo realiza una limpieza técnica de metadatos, estandarizando los nombres de las columnas a un formato compatible con SQL antes de la ingesta. Se configuró una estrategia de carga mediante <code>LoadJobConfig</code> con detección automática de esquemas y una política de <code>WRITE_TRUNCATE</code>, lo que garantiza que los dashboards de análisis dispongan siempre de la información más reciente sin duplicidad de registros, optimizando así el almacenamiento y los costos de consulta en la nube."
+          },
+          {
+            "titulo": "Normalización Encoding",
+            "imagen": "/static/images/code/Desempleo/Encoding.png",
+            "descripcion": "Se utiliza la normalización de los caracteres especiales del idioma latino <code>lantin_1</code> para evitar errores de codificación y facilitar el análisis de datos."
+          }
+        ]
+      },
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "sipter-2",
+      "titulo": "SIPTER — Gestión de Transporte Intermunicipal",
+      "descripcion": "Sistema de escritorio robusto para la automatización de tiquetes, control de flota y gestión de rutas operativas.",
+      "stack_tecnico": [
+        "Java",
+        "JavaFX",
+        "MySQL",
+        "JDBC",
+        "MVC"
+      ],
+      "github_repo": "Alejandro-78G/Sipter-2",
+      "thumbnail": "/static/images/projects/sipter.png",
+      "bloques": {
+        "problema": "La gestión manual de despachos generaba errores en la asignación de asientos y vulnerabilidad en la integridad de los datos.",
+        "prologo_implementacion": "<h3>Ingeniería de Software y Arquitectura Aplicativa</h3><p>Este sistema fue concebido bajo estándares de nivel empresarial, priorizando la escalabilidad y la robustez de los datos sobre el simple procesamiento de información.</p>",
+        "implementacion_lista": [
+          {
+            "titulo": "UI/UX y Patrón MVC",
+            "imagen": "/static/images/code/Sipter/Vista%20Gestionar%20Vehiculos.png",
+            "descripcion": "<p>La separación de responsabilidades se logró mediante el patrón <strong>Model-View-Controller</strong>. La interfaz, maquetada en <strong>JavaFX y FXML</strong>, ofrece una experiencia de usuario fluida y reactiva, permitiendo la gestión de flotas y despachos con validaciones en tiempo real que previenen errores operativos antes de que lleguen a la persistencia.</p>"
+          },
+          {
+            "titulo": "Ecosistema de Desarrollo",
+            "imagen": "/static/images/code/Sipter/validacion%20de%20existencia%20de%20usuario.png",
+            "descripcion": "<ul><li><strong>JavaFX SDK:</strong> Motor gráfico para la creación de interfaces de escritorio modernas.</li><li><strong>MySQL Connector/J:</strong> Driver oficial para comunicación de alta eficiencia con el motor DB.</li><li><strong>FontAwesomeFX:</strong> Integración de assets vectoriales para una semántica visual clara.</li><li><strong>Scene Builder:</strong> Prototipado y maquetación de vistas XML.</li></ul>"
+          },
+          {
+            "titulo": "MVC (Modelo-Vista-Controlador)",
+            "imagen": "/static/images/code/Sipter/MVC.png",
+            "descripcion": "<h3>Arquitectura Multicapa y Patrón MVC</h3><p>El sistema SIPTER fue desarrollado bajo el patrón de diseño <strong>Model-View-Controller (MVC)</strong>, lo que permite una separación clara entre la interfaz de usuario, la lógica de negocio y la persistencia de datos.</p>"
+          }
+        ],
+        "base_datos_lista": [
+          {
+            "titulo": "Arquitectura Integral y Gestión Logística (MVC & SQL)",
+            "imagen": "/static/images/code/Sipter/SQL_MVC.png",
+            "descripcion": "SIPTER es una solución robusta basada en el patrón <strong>Model-View-Controller (MVC)</strong>, diseñada para optimizar la logística de transporte intermunicipal. El sistema integra una interfaz reactiva en <strong>JavaFX</strong> con una arquitectura de datos normalizada en MySQL, permitiendo la gestión en tiempo real de vehículos, conductores y pasajeros. Mediante el uso del <strong>Patrón Singleton</strong> para conexiones seguras y <code>PreparedStatements</code>, se garantiza una trazabilidad total de la operación y un blindaje completo contra inyecciones SQL, reduciendo los errores de registro manual en un 45%."
+          },
+          {
+            "titulo": "Gestión de Viajes y Relacionalidad en SQL",
+            "imagen": "/static/images/code/Sipter/SQL_Viajes.png",
+            "descripcion": "SIPTER es una solución robusta basada en el patrón <strong>Model-View-Controller (MVC)</strong>, diseñada para optimizar la logística de transporte intermunicipal. El sistema integra una interfaz reactiva en <strong>JavaFX</strong> con una arquitectura de datos normalizada en MySQL, permitiendo la gestión en tiempo real de vehículos, conductores y pasajeros. Mediante el uso del <strong>Patrón Singleton</strong> para conexiones seguras y <code>PreparedStatements</code>, se garantiza una trazabilidad total de la operación y un blindaje completo contra inyecciones SQL, reduciendo los errores de registro manual en un 45%."
+          }
+        ],
+        "roadmap": "<p>Diseñado para evolucionar, Sipter tiene proyectada la integración de:</p><ul><li><strong>Cloud Migration:</strong> Transición a bases de datos gestionadas en AWS para acceso multi-terminal.</li><li><strong>Predictive Analytics:</strong> Módulo de IA para predecir picos de demanda según estacionalidad.</li><li><strong>Digital Wallets:</strong> Integración de pasarelas de pago (Nequi/Daviplata) vía API Rest.</li></ul>",
+        "hallazgos": "Reducción del 45% en el tiempo de registro y trazabilidad total de la operación financiera.",
+        "label_dashboard": "Interfaz y Experiencia de Usuario",
+        "galeria_interfaz": [
+          {
+            "titulo": "Vista de login",
+            "imagen": "/static/images/code/Sipter/interfaz_principal.png",
+            "descripcion": "Panel donde se accede al registro o inicio de sesión."
+          },
+          {
+            "titulo": "Modulo de registro de usuarios y conductores",
+            "imagen": "/static/images/code/Sipter/Registro.png",
+            "descripcion": "Interfaz intuitiva para la creacion de usuarios y conductores."
+          },
+          {
+            "titulo": "Menu de usuario",
+            "imagen": "/static/images/code/Sipter/Menu_Usuario.png",
+            "descripcion": "Botones con acciones al momento que le usuario pulsa le va a enviar a una ventana para hacer una de las acciones."
+          }
+        ]
+      },
+      "featured": true,
+      "order": 2
+    },
+    {
+      "id": "Analisis-Marketing",
+      "titulo": "Pipeline ETL End-to-End con NLP y Power BI",
+      "descripcion": "En el análisis de comercio electrónico moderno, las empresas enfrentan el desafío de procesar grandes volúmenes de reseñas con 'ruido digital' (errores ortográficos y modismos) e inconsistencias técnicas en el origen. Aproximadamente el 6% de los datos de producción presentan anomalías críticas, como ratings inválidos o fechas incoherentes. Esta falta de integridad, sumada a la dificultad de procesar lenguaje natural sin alterar el contexto original, impide una toma de decisiones precisa. Se requiere un sistema que no solo limpie y almacene datos, sino que enriquezca la información mediante NLP sin perder la trazabilidad del feedback real del cliente.",
+      "stack_tecnico": [
+        "Python",
+        "PostgreSQL",
+        "Pandas",
+        "Npgsql",
+        "SQLAlchemy 2.x",
+        "Star Schema"
+      ],
+      "github_repo": "Alejandro-78G/Analisis-Marketing-",
+      "thumbnail": "/static/images/projects/marketing_analysis_cover.png",
+      "powerbi_embed_url": "https://app.powerbi.com/view?r=eyJrIjoiMTFiNDBiMzctYTExZS00MTQ5LWIxY2MtMWU3OTc2YzM1NDRlIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9",
+      "bloques": {
+        "problema": "Las empresas suelen perder información crítica de sus clientes porque el feedback queda enterrado en miles de reseñas desestructuradas y con datos inconsistentes, imposibilitando una toma de decisiones rápida y basada en la realidad del mercado.",
+        "prologo_implementacion": "<h3>Ingeniería de Datos y Procesamiento de Lenguaje Natural</h3><p>El pipeline inicia con <code>data_factory.py</code> generando 500 reseñas con anomalías controladas para validar la fase de limpieza en <code>Excel_clean.py</code>, donde se normalizan formatos y nulos con Pandas. Posteriormente, <code>etl_load.py</code> estructura los datos en un esquema estrella en PostgreSQL con integridad referencial, permitiendo que <code>nlp_cleaner.py</code> enriquezca la información con scores de sentimiento de spaCy y VADER mediante el principio de <i>Data Append</i>.</p>",
+        "implementacion_lista": [
+          {
+            "titulo": "Generación del Dataset Sintético",
+            "imagen": "/static/images/code/Marketing/dataset.png",
+            "descripcion": "Orquestador inteligente que asegura la reproducibilidad del dataset mediante semillas aleatorias e inyecta un 6% de anomalías controladas para testear la resiliencia del pipeline ante datos reales."
+          },
+          {
+            "titulo": "Detección y Gestión de Anomalías",
+            "imagen": "/static/images/code/Marketing/Anomalias.png",
+            "descripcion": "Arquitectura de datos sintéticos diseñada para simular entornos de producción hostiles, inyectando anomalías controladas (fechas futuras, ratings inválidos y fallos de transmisión) que permiten demostrar y auditar la robustez del pipeline de limpieza de forma ética y reproducible."
+          },
+          {
+            "titulo": "Carga y Orquestación ETL",
+            "imagen": "/static/images/code/Marketing/ETL.png",
+            "descripcion": "Implementación del proceso de carga dimensional que asegura la integridad referencial y la normalización de tipos antes de la ingesta en PostgreSQL, garantizando que el Data Warehouse esté libre de errores de codificación."
+          }
+        ],
+        "hallazgos": "1. <strong>Calidad de Datos:</strong> Se logró una integridad del 100% mediante un pipeline de limpieza que normalizó entidades geográficas y eliminó 'basura digital' (tildes y caracteres especiales) para asegurar la consistencia en el modelado. <br><br> 2. <strong>Sesgo Lingüístico:</strong> Se identificó que el modelo VADER subestima la positividad en español en un 15% frente a modismos locales, lo que justifica la implementación futura de modelos BERT multilingües para mayor precisión. <br><br> 3. <strong>Correlación de Sentimiento:</strong> El análisis reveló que la categoría 'Tecnología' concentra el mayor volumen de reseñas neutras, mientras que 'Hogar' presenta la mayor polaridad, permitiendo priorizar estrategias de customer service diferenciadas.",
+        "label_dashboard": "Dashboard Estratégico",
+        "roadmap": "<ul><li><strong>Migración a BERT:</strong> Implementar modelos transformadores para mejor precisión en español.</li><li><strong>Cloud Scale:</strong> Migrar la carga de PostgreSQL a BigQuery para mayor escalabilidad.</li><li><strong>Stream Processing:</strong> Integración de Kafka para análisis de sentimiento en tiempo real.</li></ul>"
+      },
+      "featured": true,
+      "order": 3
+    }
+  ]
+}

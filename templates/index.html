@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block head %}
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    /* Hero Section - striking & centered */
+    .hero {
+        padding: 100px 0 60px;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--accent-blue);
+        background: rgba(56, 189, 248, 0.1);
+        padding: 6px 16px;
+        border-radius: 30px;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        margin-bottom: var(--space-lg);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .hero h1 {
+        font-size: clamp(3rem, 8vw, 5rem);
+        background: linear-gradient(to right, #fff, var(--text-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: var(--space-md);
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin: 0 auto var(--space-xl);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: var(--space-md);
+        margin-top: var(--space-2xl);
+        margin-bottom: 80px;
+    }
+
+    .skill-item {
+        padding: var(--space-md);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        text-align: center;
+        transition: all var(--transition-base);
+    }
+
+    .skill-item:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: var(--accent-purple);
+        transform: translateY(-2px);
+    }
+
+    .skill-item i {
+        display: block;
+        margin-bottom: var(--space-sm);
+        color: var(--accent-purple);
+    }
+
+    .skill-item span {
+        font-size: 0.85rem;
+        font-family: var(--font-mono);
+        color: var(--text-secondary);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: var(--space-xl);
+    }
+
+    .project-card {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .project-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-bottom: 1px solid var(--border);
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img {
+        transform: scale(1.05);
+    }
+
+    .project-body {
+        padding: var(--space-xl);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: var(--space-md);
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+
+    .project-desc {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: var(--space-lg);
+        flex: 1;
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: auto;
+    }
+
+    .tag {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        background: rgba(255,255,255,0.05);
+        padding: 4px 10px;
+        border-radius: 4px;
+        color: var(--accent-blue);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-badge">Jose Alejandro Cristancho</div>
+    <h1>Data<span>Analyst</span></h1>
+    <p>Transforming complex datasets into actionable insights through ETL pipelines, NLP, and interactive storytelling.</p>
+    
+    <div class="skills-grid">
+        <div class="skill-item">
+            <i data-lucide="database"></i>
+            <span>SQL / NoSQL</span>
+        </div>
+        <div class="skill-item">
+            <i data-lucide="code-2"></i>
+            <span>Python / ETL</span>
+        </div>
+        <div class="skill-item">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Power BI / DAX</span>
+        </div>
+        <div class="skill-item">
+            <i data-lucide="brain-circuit"></i>
+            <span>NLP / spaCy</span>
+        </div>
+        <div class="skill-item">
+            <i data-lucide="layout"></i>
+            <span>UI/UX Design</span>
+        </div>
+        <div class="skill-item">
+            <i data-lucide="git-branch"></i>
+            <span>CI/CD / Git</span>
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-xl);">
+        <h2 style="margin-bottom: 0;">Proyectos Seleccionados</h2>
+        <div style="flex: 1; height: 1px; background: var(--border);"></div>
+    </div>
+    
+    <div class="projects-grid">
+        {% for project in projects %}
+        <a href="/project/{{ project.id }}" class="gitspec-card project-card">
+            <div style="overflow: hidden;">
+                <img src="{{ project.thumbnail }}" alt="{{ project.titulo }}" class="project-img">
+            </div>
+            <div class="project-body">
+                <div class="project-header">
+                    <h3 class="project-title">{{ project.titulo }}</h3>
+                    <i data-lucide="arrow-up-right" style="color: var(--text-secondary); width: 20px;"></i>
+                </div>
+                <p class="project-desc">{{ project.descripcion }}</p>
+                
+                <div class="tag-list">
+                    {% for tech in project.stack_tecnico %}
+                    <span class="tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    lucide.createIcons();
+</script>
+{% endblock %}

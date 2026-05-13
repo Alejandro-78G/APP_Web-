@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block head %}
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    .project-header {
+        margin-bottom: var(--space-2xl);
+        padding: 40px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .breadcrumb {
+        font-family: var(--font-mono);
+        color: var(--accent-blue);
+        margin-bottom: var(--space-md);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
+    
+    .breadcrumb a:hover {
+        color: var(--accent-blue);
+    }
+
+    .project-title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        margin-bottom: var(--space-lg);
+        background: linear-gradient(to right, #fff, var(--accent-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .project-meta-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        align-items: center;
+    }
+
+    .github-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        transition: all var(--transition-base);
+    }
+
+    .github-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--accent-purple);
+        transform: translateY(-2px);
+    }
+
+    .tech-stack-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tech-tag {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        background: rgba(129, 140, 248, 0.1);
+        color: var(--accent-purple);
+        padding: 4px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(129, 140, 248, 0.2);
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-top: 80px;
+        margin-bottom: var(--space-xl);
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+    }
+
+    .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    .content-block {
+        background: rgba(255, 255, 255, 0.02);
+        border-left: 4px solid var(--accent-blue);
+        padding: var(--space-xl);
+        border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+        margin-bottom: var(--space-2xl);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+    }
+
+    /* Window Frame Component */
+    .window-frame {
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .window-header {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+
+    .window-content img {
+        width: 100%;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    /* Code Focus Enhancement */
+    .code-focus {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        margin-bottom: 100px;
+        align-items: center;
+    }
+
+    .code-focus-content h4 {
+        font-size: 1.5rem;
+        color: #fff;
+        margin-bottom: var(--space-md);
+    }
+
+    .step-description {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .iframe-container {
+        position: relative;
+        width: 100%;
+        padding-top: 70%; /* Increased from 56.25% for a larger dashboard */
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    @media (max-width: 1024px) {
+        .code-focus {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="project-header">
+    <div class="breadcrumb">
+        <a href="/">projects</a> <i data-lucide="chevron-right" style="width: 14px;"></i> <span>{{ project.id }}</span>
+    </div>
+    <h1 class="project-title">{{ project.titulo }}</h1>
+    
+    <div class="project-meta-bar">
+        {% if project.github_repo %}
+        <a href="https://github.com/{{ project.github_repo }}" class="github-btn" target="_blank" rel="noopener noreferrer">
+            <i data-lucide="github" style="width: 18px;"></i>
+            <span>{{ project.github_repo }}</span>
+        </a>
+        {% endif %}
+
+        <div class="tech-stack-badges">
+            {% for tech in project.stack_tecnico %}
+            <span class="tech-tag">{{ tech }}</span>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="project-body">
+    <h2 class="section-title"><i data-lucide="info" style="color: var(--accent-blue);"></i> El Problema</h2>
+    <div class="content-block">
+        <p>{{ project.bloques.problema }}</p>
+    </div>
+
+    <h2 class="section-title"><i data-lucide="cpu" style="color: var(--accent-purple);"></i> Implementación Técnica</h2>
+    
+    {% if project.bloques.prologo_implementacion %}
+    <div class="content-block" style="margin-bottom: var(--space-xl);">
+        {{ project.bloques.prologo_implementacion | safe }}
+    </div>
+    {% endif %}
+
+    {% if project.bloques.implementacion_lista %}
+    <div class="implementation-steps">
+        {% for step in project.bloques.implementacion_lista %}
+        <div class="code-focus">
+            <div class="window-frame">
+                <div class="window-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="window-content">
+                    <img src="{{ step.imagen }}" alt="{{ step.titulo }}">
+                </div>
+            </div>
+            <div class="code-focus-content">
+                <h4 style="color: var(--accent-blue);">{{ loop.index }}. {{ step.titulo }}</h4>
+                <div class="step-description">
+                    {{ step.descripcion | safe }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="content-block">
+        {{ project.bloques.proceso | safe }}
+    </div>
+    {% endif %}
+
+    {% if project.bloques.roadmap %}
+    <h2 class="section-title"><i data-lucide="map" style="color: var(--accent-green);"></i> Hoja de Ruta</h2>
+    <div class="content-block">
+        {{ project.bloques.roadmap | safe }}
+    </div>
+    {% endif %}
+
+    {% if project.bloques.base_datos_lista %}
+    <h2 class="section-title"><i data-lucide="database" style="color: var(--accent-blue);"></i> Arquitectura de Datos</h2>
+    <div class="project-gallery">
+        {% for item in project.bloques.base_datos_lista %}
+        <div class="code-focus">
+            <div class="window-frame">
+                <div class="window-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="window-content">
+                    <img src="{{ item.imagen }}" alt="{{ item.titulo }}">
+                </div>
+            </div>
+            <div class="code-focus-content">
+                <h4 style="color: var(--accent-blue);">{{ item.titulo }}</h4>
+                <div class="step-description">
+                    {{ item.descripcion | safe }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h2 class="section-title"><i data-lucide="trending-up" style="color: var(--accent-green);"></i> Resultados</h2>
+    <div class="content-block">
+        <p>{{ project.bloques.hallazgos }}</p>
+    </div>
+
+    <h2 class="section-title"><i data-lucide="line-chart" style="color: var(--accent-blue);"></i> {{ project.bloques.label_dashboard or "Dashboard Interactivo" }}</h2>
+    {% if project.powerbi_embed_url %}
+    <div class="iframe-container" style="margin-bottom: var(--space-xl);">
+        <iframe title="Power BI Dashboard" src="{{ project.powerbi_embed_url }}" allowFullScreen="true"></iframe>
+    </div>
+    {% else %}
+    <div class="gitspec-card" style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-xl);">
+        <p>⚠️ Este proyecto no cuenta con una visualización interactiva pública en este momento.</p>
+    </div>
+    {% endif %}
+
+    {% if project.bloques.galeria_interfaz %}
+    <h2 class="section-title"><i data-lucide="image" style="color: var(--accent-purple);"></i> Galería de Interfaz</h2>
+    <div class="project-gallery">
+        {% for item in project.bloques.galeria_interfaz %}
+        <div class="code-focus">
+            <div class="window-frame">
+                <div class="window-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="window-content">
+                    <img src="{{ item.imagen }}" alt="{{ item.titulo }}">
+                </div>
+            </div>
+            <div class="code-focus-content">
+                <h4 style="color: var(--accent-blue);">{{ item.titulo }}</h4>
+                <div class="step-description">
+                    {{ item.descripcion | safe }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    lucide.createIcons();
+</script>
+{% endblock %}

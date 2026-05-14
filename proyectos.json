@@ -20,7 +20,7 @@
       ],
       "powerbi_embed_url": "https://app.powerbi.com/view?r=eyJrIjoiMWRkNjE4NzYtN2I0Yy00MTE1LWJmMmUtNmFhYzhlNmVlYjVmIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9",
       "bloques": {
-        "problema": "La información sobre ofertas laborales en Colombia está dispersa en múltiples plataformas y formatos inconsistentes, lo que impide un análisis unificado de la demanda. Por ejemplo, al intentar consolidar datos de portales como <i>LinkedIn</i> y <i>El Empleo</i>, se identificó que una misma ubicación geográfica puede aparecer registrada de más de cinco formas distintas (ej. 'Bogotá D.C', 'Bogota-Cundinamarca', 'BOG'). Además, las estrictas políticas anti-scraping de redes profesionales bloquean el acceso a datos granulares, obligando a los analistas a lidiar con estructuras de datos incompletas y 'ruido digital' que sesga los indicadores de empleabilidad juvenil.",
+        "problema": "Analizar la demanda laboral en Colombia es complejo debido a la dispersión de los datos. Aunque intenté utilizar LinkedIn, sus políticas anti-scraping bloquearon el acceso, por lo que opté por El Empleo como fuente de datos. Aun así, enfrenté inconsistencias graves, como ubicaciones registradas de cinco formas distintas (ej. 'Bogotá D.C.', 'BOG'), lo que genera un 'ruido digital' que fragmenta la información y dificulta construir indicadores precisos sobre la empleabilidad juvenil.",
         "proceso": "1. Extracción de datos (Web Scraping / APIs). 2. Limpieza con Pandas. 3. Carga en PostgreSQL. 4. Dashboard interactivo.",
         "hallazgos": "El análisis revela una brecha crítica en la empleabilidad nacional: actualmente existe una oferta de apenas 1 vacante por cada 2,868 graduados. Esta desproporción subraya la necesidad urgente de fortalecer la creación de empleo formal y alinear la formación académica con las demandas reales del mercado laboral en las principales ciudades.",
         "implementacion_lista": [
@@ -84,7 +84,7 @@
           {
             "titulo": "MVC (Modelo-Vista-Controlador)",
             "imagen": "/static/images/code/Sipter/MVC.png",
-            "descripcion": "<h3>Arquitectura Multicapa y Patrón MVC</h3><p>El sistema SIPTER fue desarrollado bajo el patrón de diseño <strong>Model-View-Controller (MVC)</strong>, lo que permite una separación clara entre la interfaz de usuario, la lógica de negocio y la persistencia de datos.</p>"
+            "descripcion": "<h3>Arquitectura Multicapa y Patrón MVC</h3><p>El sistema SIPTER se desarrollado bajo el patrón de diseño <strong>Model-View-Controller (MVC)</strong>, lo que permite una separación clara entre la interfaz de usuario, la lógica de negocio y la persistencia de datos.</p>"
           }
         ],
         "base_datos_lista": [
@@ -96,7 +96,7 @@
           {
             "titulo": "Gestión de Viajes y Relacionalidad en SQL",
             "imagen": "/static/images/code/Sipter/SQL_Viajes.png",
-            "descripcion": "SIPTER es una solución robusta basada en el patrón <strong>Model-View-Controller (MVC)</strong>, diseñada para optimizar la logística de transporte intermunicipal. El sistema integra una interfaz reactiva en <strong>JavaFX</strong> con una arquitectura de datos normalizada en MySQL, permitiendo la gestión en tiempo real de vehículos, conductores y pasajeros. Mediante el uso del <strong>Patrón Singleton</strong> para conexiones seguras y <code>PreparedStatements</code>, se garantiza una trazabilidad total de la operación y un blindaje completo contra inyecciones SQL, reduciendo los errores de registro manual en un 45%."
+            "descripcion": "Esta es la estructura que hace posible que Sipter funcione: es el 'cerebro' del sistema. Diseñé este diagrama para conectar las preferencias de viaje de los usuarios con la realidad operativa de los conductores. El modelo mantiene todo organizado y en su lugar, asegurando que cada viaje tenga claro su origen, su destino y quién está al volante, evitando errores y duplicidad de datos. Es una arquitectura limpia, pensada para que la información de cada servicio sea siempre fiable, fácil de rastrear y coherente."
           }
         ],
         "roadmap": "<p>Diseñado para evolucionar, Sipter tiene proyectada la integración de:</p><ul><li><strong>Cloud Migration:</strong> Transición a bases de datos gestionadas en AWS para acceso multi-terminal.</li><li><strong>Predictive Analytics:</strong> Módulo de IA para predecir picos de demanda según estacionalidad.</li><li><strong>Digital Wallets:</strong> Integración de pasarelas de pago (Nequi/Daviplata) vía API Rest.</li></ul>",
@@ -135,7 +135,7 @@
         "SQLAlchemy 2.x",
         "Star Schema"
       ],
-      "github_repo": "Alejandro-78G/Analisis-Marketing-",
+      "github_repo": "Alejandro-78G/Análisis-Marketing",
       "thumbnail": "/static/images/projects/marketing_analysis_cover.png",
       "powerbi_embed_url": "https://app.powerbi.com/view?r=eyJrIjoiMTFiNDBiMzctYTExZS00MTQ5LWIxY2MtMWU3OTc2YzM1NDRlIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9",
       "bloques": {
@@ -155,7 +155,7 @@
           {
             "titulo": "Carga y Orquestación ETL",
             "imagen": "/static/images/code/Marketing/ETL.png",
-            "descripcion": "Implementación del proceso de carga dimensional que asegura la integridad referencial y la normalización de tipos antes de la ingesta en PostgreSQL, garantizando que el Data Warehouse esté libre de errores de codificación."
+            "descripcion": "Implementación del proceso de carga dimensional que asegura la integridad referencial y la normalización de tipos antes de cargar datos en PostgreSQL, garantizando que el Data Warehouse esté libre de errores de codificación."
           }
         ],
         "hallazgos": "1. <strong>Calidad de Datos:</strong> Se logró una integridad del 100% mediante un pipeline de limpieza que normalizó entidades geográficas y eliminó 'basura digital' (tildes y caracteres especiales) para asegurar la consistencia en el modelado. <br><br> 2. <strong>Sesgo Lingüístico:</strong> Se identificó que el modelo VADER subestima la positividad en español en un 15% frente a modismos locales, lo que justifica la implementación futura de modelos BERT multilingües para mayor precisión. <br><br> 3. <strong>Correlación de Sentimiento:</strong> El análisis reveló que la categoría 'Tecnología' concentra el mayor volumen de reseñas neutras, mientras que 'Hogar' presenta la mayor polaridad, permitiendo priorizar estrategias de customer service diferenciadas.",

@@ -217,7 +217,7 @@
 <div class="project-body">
     <h2 class="section-title"><i data-lucide="info" style="color: var(--accent-blue);"></i> El Problema</h2>
     <div class="content-block">
-        <p>{{ project.bloques.problema }}</p>
+        <p>{{ project.bloques.problema | safe }}</p>
     </div>
 
     <h2 class="section-title"><i data-lucide="cpu" style="color: var(--accent-purple);"></i> Implementación Técnica</h2>
@@ -292,7 +292,7 @@
 
     <h2 class="section-title"><i data-lucide="trending-up" style="color: var(--accent-green);"></i> Resultados</h2>
     <div class="content-block">
-        <p>{{ project.bloques.hallazgos }}</p>
+        <p>{{ project.bloques.hallazgos | safe }}</p>
     </div>
 
     <h2 class="section-title"><i data-lucide="line-chart" style="color: var(--accent-blue);"></i> {{ project.bloques.label_dashboard or "Dashboard Interactivo" }}</h2>

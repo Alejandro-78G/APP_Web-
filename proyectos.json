@@ -125,7 +125,7 @@
     },
     {
       "id": "Analisis-Marketing",
-      "titulo": "Pipeline ETL End-to-End con NLP y Power BI",
+      "titulo": "Proyecto mercadeo",
       "descripcion": "En el análisis de comercio electrónico moderno, las empresas enfrentan el desafío de procesar grandes volúmenes de reseñas con 'ruido digital' (errores ortográficos y modismos) e inconsistencias técnicas en el origen. Aproximadamente el 6% de los datos de producción presentan anomalías críticas, como ratings inválidos o fechas incoherentes. Esta falta de integridad, sumada a la dificultad de procesar lenguaje natural sin alterar el contexto original, impide una toma de decisiones precisa. Se requiere un sistema que no solo limpie y almacene datos, sino que enriquezca la información mediante NLP sin perder la trazabilidad del feedback real del cliente.",
       "stack_tecnico": [
         "Python",

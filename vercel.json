@@ -1,7 +1,14 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "project.html", "use": "@vercel/static" },
+    { "src": "config.json", "use": "@vercel/static" },
+    { "src": "proyectos.json", "use": "@vercel/static" },
+    { "src": "static/**", "use": "@vercel/static" }
+  ],
   "routes": [
+    { "src": "/project/(.*)", "dest": "/project.html?id=$1" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

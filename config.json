@@ -1,0 +1,22 @@
+{
+  "personal": {
+    "nombre": "Jose Alejandro Cristancho",
+    "status_badge": "● Disponible para nuevos proyectos",
+    "rol": "Data Analyst & Analytics Engineer",
+    "biografia": "Especialista en transformar grandes volúmenes de datos en decisiones estratégicas mediante Pipelines ETL automatizados, Procesamiento de Lenguaje Natural (NLP) y Dashboards de alto impacto en Power BI.",
+    "telefono": "+57 322 945 2956",
+    "whatsapp_num": "573229452956",
+    "email": "josegaona005@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/jos%C3%A9-alejandro-gaona-cristancho-a49136355/",
+    "github": "https://github.com/Alejandro-78G",
+    "cv_url": "static/docs/CV_Jose_Cristancho.pdf"
+  },
+  "habilidades": [
+    { "nombre": "SQL / PostgreSQL", "icono": "database", "nivel": "Avanzado" },
+    { "nombre": "Python / Pandas / ETL", "icono": "code-2", "nivel": "Avanzado" },
+    { "nombre": "Power BI / DAX", "icono": "bar-chart-3", "nivel": "Avanzado" },
+    { "nombre": "NLP / spaCy / VADER", "icono": "brain-circuit", "nivel": "Intermedio" },
+    { "nombre": "Web Scraping / Selenium", "icono": "globe", "nivel": "Avanzado" },
+    { "nombre": "Git / CI/CD / Vercel", "icono": "git-branch", "nivel": "Intermedio" }
+  ]
+}

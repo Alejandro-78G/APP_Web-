@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Proyecto | Jose Alejandro Cristancho</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-dark:       #060911;
+            --bg-card:       rgba(15, 23, 42, 0.65);
+            --border-color:  rgba(255, 255, 255, 0.08);
+            
+            --accent-cyan:   #38bdf8;
+            --accent-purple: #c084fc;
+            --accent-emerald:#34d399;
+
+            --text-main:     #f8fafc;
+            --text-muted:    #94a3b8;
+
+            --font-display:  'Syne', sans-serif;
+            --font-body:     'Outfit', sans-serif;
+            --font-code:     'JetBrains Mono', monospace;
+
+            --radius-card:   16px;
+            --radius-btn:    10px;
+            --transition:    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.12), transparent 50%),
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 48px 48px, 48px 48px;
+            background-attachment: fixed;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(6, 9, 17, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .back-link:hover { transform: translateX(-4px); }
+
+        main {
+            flex: 1;
+            padding: 40px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .breadcrumb {
+            font-family: var(--font-code);
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent-cyan); }
+
+        .project-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: var(--radius-btn);
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .github-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        .tech-stack-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            background: rgba(192, 132, 252, 0.1);
+            color: var(--accent-purple);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(192, 132, 252, 0.25);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+        }
+
+        .content-block {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 24px 28px;
+            border-radius: 0 var(--radius-card) var(--radius-card) 0;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Mac Window Frame */
+        .window-frame {
+            background: #0f172a;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin-bottom: 16px;
+        }
+
+        .window-header {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .window-content img {
+            width: 100%;
+            display: block;
+        }
+
+        .code-focus {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 36px;
+            margin-bottom: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .code-focus { grid-template-columns: 1fr; }
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-top: 70%;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.15);
+            margin-bottom: 40px;
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 24px;
+            text-align: center;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link">
+            <i data-lucide="arrow-left"></i> Volver a Proyectos
+        </a>
+        <div style="font-family: var(--font-code); font-size: 0.85rem; color: var(--text-muted);" id="author-name">
+            Jose Alejandro Cristancho
+        </div>
+    </header>
+
+    <main id="project-main">
+        <!-- Project details loaded dynamically -->
+    </main>
+
+    <footer>
+        <p>Jose Alejandro Cristancho Gaona &copy; 2026</p>
+    </footer>
+
+    <script>
+        async function loadProjectDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const projectId = params.get('id') || 'Analisis-Marketing';
+
+            try {
+                const configRes = await fetch('config.json');
+                const config = await configRes.json();
+                document.getElementById('author-name').textContent = config.personal.nombre;
+
+                const projRes = await fetch('proyectos.json');
+                const projData = await projRes.json();
+
+                const project = projData.projects.find(p => p.id === projectId) || projData.projects[0];
+                document.title = `${project.titulo} | ${config.personal.nombre}`;
+
+                const main = document.getElementById('project-main');
+                const b = project.bloques || {};
+
+                main.innerHTML = `
+                    <div class="breadcrumb">
+                        <a href="index.html">Proyectos</a> <i data-lucide="chevron-right" style="width: 14px;"></i> <span>${project.id}</span>
+                    </div>
+
+                    <h1 class="project-title">${project.titulo}</h1>
+
+                    <div class="project-meta-bar">
+                        ${project.github_repo ? `
+                            <a href="https://github.com/${project.github_repo}" class="github-btn" target="_blank" rel="noopener noreferrer">
+                                <i data-lucide="github" style="width: 18px;"></i>
+                                <span>${project.github_repo}</span>
+                            </a>
+                        ` : ''}
+
+                        <div class="tech-stack-badges">
+                            ${project.stack_tecnico.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    ${b.problema ? `
+                        <h2 class="section-title"><i data-lucide="info" style="color: var(--accent-cyan);"></i> El Problema</h2>
+                        <div class="content-block"><p>${b.problema}</p></div>
+                    ` : ''}
+
+                    ${b.prologo_implementacion ? `
+                        <h2 class="section-title"><i data-lucide="cpu" style="color: var(--accent-purple);"></i> Implementación Técnica</h2>
+                        <div class="content-block">${b.prologo_implementacion}</div>
+                    ` : ''}
+
+                    ${b.implementacion_lista ? `
+                        <div class="implementation-steps">
+                            ${b.implementacion_lista.map((step, idx) => `
+                                <div class="code-focus">
+                                    <div class="window-frame">
+                                        <div class="window-header">
+                                            <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                                        </div>
+                                        <div class="window-content"><img src="${step.imagen}" alt="${step.titulo}"></div>
+                                    </div>
+                                    <div>
+                                        <h4 style="color: var(--accent-cyan); font-size: 1.3rem; margin-bottom: 10px;">${idx + 1}. ${step.titulo}</h4>
+                                        <div style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6;">${step.descripcion}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+
+                    ${b.base_datos_lista ? `
+                        <h2 class="section-title"><i data-lucide="database" style="color: var(--accent-cyan);"></i> Arquitectura de Datos</h2>
+                        ${b.base_datos_lista.map(item => `
+                            <div class="code-focus">
+                                <div class="window-frame">
+                                    <div class="window-header">
+                                        <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                                    </div>
+                                    <div class="window-content"><img src="${item.imagen}" alt="${item.titulo}"></div>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--accent-cyan); font-size: 1.3rem; margin-bottom: 10px;">${item.titulo}</h4>
+                                    <div style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6;">${item.descripcion}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    ` : ''}
+
+                    ${b.hallazgos ? `
+                        <h2 class="section-title"><i data-lucide="trending-up" style="color: var(--accent-emerald);"></i> Resultados</h2>
+                        <div class="content-block"><p>${b.hallazgos}</p></div>
+                    ` : ''}
+
+                    ${project.powerbi_embed_url ? `
+                        <h2 class="section-title"><i data-lucide="line-chart" style="color: var(--accent-cyan);"></i> Dashboard Interactivo</h2>
+                        <div class="iframe-container">
+                            <iframe title="Power BI Dashboard" src="${project.powerbi_embed_url}" allowFullScreen="true"></iframe>
+                        </div>
+                    ` : ''}
+                `;
+
+                lucide.createIcons();
+
+            } catch (err) {
+                console.error("Error cargando detalle del proyecto:", err);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadProjectDetail);
+    </script>
+</body>
+</html>

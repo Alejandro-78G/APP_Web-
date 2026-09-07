@@ -245,6 +245,76 @@
             border: none;
         }
 
+        /* Streamlit embed — altura fija para mostrar el dashboard completo */
+        .streamlit-frame {
+            width: 100%;
+            height: 780px;
+            border-radius: var(--radius-card);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(56, 189, 248, 0.12);
+            margin-bottom: 40px;
+            background: #0f172a;
+        }
+
+        .streamlit-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(52, 211, 153, 0.12);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-family: var(--font-code);
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-left: 12px;
+            vertical-align: middle;
+            animation: pulse-badge 2s infinite;
+        }
+
+        .live-badge::before {
+            content: "";
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent-emerald);
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.65; }
+        }
+
+        .streamlit-open-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(192,132,252,0.15));
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: var(--radius-btn);
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-bottom: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .streamlit-open-btn:hover {
+            background: linear-gradient(135deg, rgba(56,189,248,0.25), rgba(192,132,252,0.25));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
+        }
+
         footer {
             border-top: 1px solid var(--border-color);
             padding: 40px 24px;
@@ -366,9 +436,29 @@
                     ` : ''}
 
                     ${project.powerbi_embed_url ? `
-                        <h2 class="section-title"><i data-lucide="line-chart" style="color: var(--accent-cyan);"></i> Dashboard Interactivo</h2>
+                        <h2 class="section-title"><i data-lucide="bar-chart-2" style="color: var(--accent-cyan);"></i> Dashboard Power BI</h2>
                         <div class="iframe-container">
                             <iframe title="Power BI Dashboard" src="${project.powerbi_embed_url}" allowFullScreen="true"></iframe>
+                        </div>
+                    ` : ''}
+
+                    ${project.streamlit_url ? `
+                        <h2 class="section-title">
+                            <i data-lucide="activity" style="color: var(--accent-emerald);"></i>
+                            ${b.label_streamlit || 'Dashboard Interactivo en Vivo'}
+                            <span class="live-badge">EN VIVO</span>
+                        </h2>
+                        <a href="${project.streamlit_url}" class="streamlit-open-btn" target="_blank" rel="noopener noreferrer">
+                            <i data-lucide="external-link" style="width:16px;"></i>
+                            Abrir en pantalla completa
+                        </a>
+                        <div class="streamlit-frame">
+                            <iframe
+                                title="${project.titulo} — Dashboard Streamlit"
+                                src="${project.streamlit_url}?embed=true&embed_options=show_toolbar,show_colored_line"
+                                allow="fullscreen"
+                                loading="lazy"
+                            ></iframe>
                         </div>
                     ` : ''}
                 `;

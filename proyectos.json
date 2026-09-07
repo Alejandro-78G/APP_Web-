@@ -48,8 +48,10 @@
           }
         ],
         "hallazgos": "1. <strong>Brecha Crítica de Empleabilidad:</strong> El análisis espacial reveló una desproporción de 1 vacante formal por cada 2,868 graduados en ciudades intermedias. <br><br> 2. <strong>Rendimiento de Ingesta OLAP:</strong> La transición de procesamiento relacional tradicional a DuckDB + Parquet redujo los tiempos de consulta analítica en un 85%.",
-        "label_dashboard": "Dashboard Analítico & Dashboard Power BI"
+        "label_dashboard": "Dashboard Analítico & Dashboard Power BI",
+        "label_streamlit": "Dashboard Interactivo en Vivo (Streamlit)"
       },
+      "streamlit_url": "https://j8bxcaexg4rtieuphcj46r.streamlit.app/",
       "featured": true,
       "order": 1
     },

@@ -21,7 +21,7 @@
         "Docker",
         "GitHub Actions"
       ],
-      "powerbi_embed_url": "https://app.powerbi.com/view?r=eyJrIjoiMWRkNjE4NzYtN2I0Yy00MTE1LWJmMmUtNmFhYzhlNmVlYjVmIiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9",
+
       "bloques": {
         "problema": "Analizar la brecha entre la oferta universitaria y la demanda laboral en Colombia es complejo debido a la dispersión de datos heterogéneos y la falta de estandarización geográfica. Las fuentes públicas (SPE datos.gov.co, portales de empleo y SNIES) presentan esquemas cambiantes, inconsistencias tipográficas y ruidos de codificación que dificultan la construcción de indicadores de empleabilidad precisos a nivel municipal y departamental.",
         "prologo_implementacion": "<h3>Arquitectura de Datos de Vanguardia (v2.0)</h3><p>Se rediseñó el pipeline bajo una arquitectura modular de ingeniería de datos: Ingesta asíncrona multi-fuente (HTTPX + Selectolax + API REST Socrata), validación de contratos de datos mediante <strong>Pydantic v2</strong>, almacenamiento columnar de alto rendimiento en <strong>Apache Parquet</strong>, modelado dimensional OLAP con <strong>DuckDB y dbt Core</strong>, y visualización en tiempo real.</p>",

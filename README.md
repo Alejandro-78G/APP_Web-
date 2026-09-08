@@ -2,13 +2,15 @@
 
 Este es mi portafolio profesional, diseñado para mostrar mis capacidades en **Ingeniería de Datos**, **Análisis de Marketing** y **Visualización Avanzada**. A diferencia de los portafolios estáticos convencionales, este sistema está construido sobre un backend robusto que permite una gestión dinámica de proyectos y una experiencia de usuario premium.
 
+## 🌐 Enlace de Producción
+- **Sitio Web en Vivo:** [app-web-kohl-two.vercel.app](https://app-web-kohl-two.vercel.app/)
+
 ## 🛠️ Stack Tecnológico
 
-- **Backend:** [FastAPI](https://fastapi.tiangolo.com/) (Python 3.11+)
-- **Frontend:** Jinja2 Templates & Vanilla CSS (Custom Design System)
-- **Visualización:** Power BI Embedded
-- **Gestión de Datos:** Estructura dinámica basada en JSON
-- **Despliegue:** Preparado para Docker / Render / Railway
+- **Frontend:** HTML5 / Custom Glassmorphism CSS / Vanilla JS
+- **Visualización:** Streamlit Cloud Embedded (Live Dashboards) & Power BI
+- **Gestión de Datos:** Arquitectura desacoplada basada en `proyectos.json` y `config.json`
+- **Despliegue & Hosting:** Vercel (CI/CD automático desde GitHub)
 
 ## ✨ Características Principales
 

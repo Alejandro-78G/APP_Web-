@@ -543,7 +543,7 @@
                         `).join('')}
                     ` : ''}
 
-                    ${b.hallazgos ? `
+                    ${b.hallazgos && !b.analisis ? `
                         <h2 class="section-title"><i data-lucide="trending-up" style="color: var(--accent-emerald);"></i> Resultados</h2>
                         <div class="content-block"><p>${b.hallazgos}</p></div>
                     ` : ''}

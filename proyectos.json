@@ -8,7 +8,7 @@
     {
       "id": "vacantes-colombia",
       "titulo": "Análisis de vacantes laborales y empleabilidad en Colombia (v2.0)",
-      "descripcion": "Plataforma de Data Engineering & Analytics de vanguardia que extrae de forma asíncrona, valida contratos de datos (Pydantic v2), modela en estrella (dbt + DuckDB) y analiza espacialmente más de 5.000 vacantes a nivel nacional.",
+      "descripcion": "Pipeline de Data Engineering & Analytics end-to-end que analiza la brecha de empleabilidad formal en Colombia, cruzando datos de vacantes con el registro histórico de más de 3M de graduados (SNIES), implementado con Pydantic v2, DuckDB, dbt y visualización interactiva en Streamlit.",
       "github_repo": "Alejandro-78G/analisis-brecha-laboral-colombia",
       "thumbnail": "/static/images/projects/vacantes-colombia.png",
       "stack_tecnico": [
@@ -24,61 +24,59 @@
 
       "bloques": {
         "problema": "Analizar la brecha entre la oferta universitaria y la demanda laboral en Colombia es complejo debido a la dispersión de datos heterogéneos y la falta de estandarización geográfica. Las fuentes públicas (SPE datos.gov.co, portales de empleo y SNIES) presentan esquemas cambiantes, inconsistencias tipográficas y ruidos de codificación que dificultan la construcción de indicadores de empleabilidad precisos a nivel municipal y departamental.",
-        "prologo_implementacion": "<h3>Arquitectura de Datos de Vanguardia (v2.0)</h3><p>Se rediseñó el pipeline bajo una arquitectura modular de ingeniería de datos: Ingesta asíncrona multi-fuente (HTTPX + Selectolax + API REST Socrata), validación de contratos de datos mediante <strong>Pydantic v2</strong>, almacenamiento columnar de alto rendimiento en <strong>Apache Parquet</strong>, modelado dimensional OLAP con <strong>DuckDB y dbt Core</strong>, y visualización en tiempo real.</p>",
+        "prologo_implementacion": "<h3>Arquitectura de Datos y Evolución Técnica (v2.0)</h3><p>El proyecto evolucionó desde un flujo de scripts síncronos hacia un pipeline modular de ingeniería de datos: Ingesta asíncrona multi-fuente (HTTPX + Selectolax + API REST Socrata), validación estricta de esquemas mediante <strong>Pydantic v2</strong>, almacenamiento columnar de alto rendimiento en <strong>Apache Parquet</strong>, modelado dimensional OLAP con <strong>DuckDB y dbt Core</strong>, y visualización en tiempo real con <strong>Streamlit</strong>.</p>",
         "implementacion_lista": [
           {
-            "titulo": "Ingesta Asíncrona Multi-fuente (HTTPX & Socrata REST API)",
+            "titulo": "1. Ingesta Web: Evolución de Selenium a Scraping Asíncrono",
             "imagen": "/static/images/code/Desempleo/selemium.png",
-            "descripcion": "Implementación de un motor de extracción de alta eficiencia utilizando <strong>HTTPX (Async I/O)</strong> y <code>Selectolax</code> para scraping asíncrono, combinado con la integración de la API REST Socrata de datos.gov.co (SPE) y datos abiertos del SNIES. Esta estrategia elimina los cuellos de botella de ejecuciones síncronas tradicionales, capturando miles de registros simultáneamente con tolerancia a fallos."
+            "descripcion": "El pipeline inició con automatización en <strong>Selenium</strong> para la extracción de ofertas en portales de empleo, refactorizado en la versión 2.0 hacia un motor asíncrono con <strong>HTTPX</strong>, <code>Selectolax</code> y la API REST Socrata de datos.gov.co (SPE), acelerando los tiempos de captura en más de un 70%."
           },
           {
-            "titulo": "Contratos de Datos y Calidad (Pydantic v2 & Pandera)",
+            "titulo": "2. Limpieza, Normalización Geográfica y Calidad de Datos",
             "imagen": "/static/images/code/Desempleo/Normalizar_municio.png",
-            "descripcion": "Definición de contratos de datos estrictos mediante <strong>Pydantic v2</strong>. Cada vacante ingerida pasa por un pipeline de validación de tipos, coerción de campos nulos y normalización de entidades geográficas antes de su persistencia en el Data Lake, garantizando un índice de calidad del 100% libre de datos corruptos."
+            "descripcion": "Estandarización de municipios y departamentos colombianos mediante reglas de sanitización de texto y validación de esquemas con <strong>Pydantic v2</strong>, garantizando coherencia territorial para cruces precisos con la codificación oficial DIVIPOLA."
           },
           {
-            "titulo": "Data Lake Columnar en Apache Parquet",
+            "titulo": "3. Almacenamiento Columnar y Data Lake (BigQuery a Parquet)",
             "imagen": "/static/images/code/Desempleo/Bigquery.png",
-            "descripcion": "Persistencia de datasets procesados en formato columnar <strong>Apache Parquet</strong> partitioning por departamento y fecha. Esto reduce el consumo de almacenamiento en más de un 70% y optimiza los tiempos de consulta para analítica OLAP avanzada."
+            "descripcion": "Evolución de la persistencia: de cargas estructuradas en <strong>Google BigQuery</strong> hacia un Data Lake columnar local en <strong>Apache Parquet</strong> particionado por fecha y región, optimizando el consumo de almacenamiento y eliminando costos de infraestructura cloud recurrente."
           },
           {
-            "titulo": "Modelado Dimensional OLAP (DuckDB & dbt Core)",
+            "titulo": "4. Modelado Dimensional y Analítica OLAP (DuckDB & dbt Core)",
             "imagen": "/static/images/code/Desempleo/Encoding.png",
-            "descripcion": "Orquestación de transformaciones dimensionales con <strong>dbt Core</strong> sobre un Data Warehouse en memoria accionado por <strong>DuckDB</strong>. Permite ejecutar modelos en estrella (Star Schema) de forma ultra rápida para calcular ratios de empleabilidad, salario promedio por región y brechas por área de conocimiento."
+            "descripcion": "Orquestación de transformaciones dimensionales (Star Schema) sobre un Data Warehouse analítico con <strong>DuckDB y dbt Core</strong>, facilitando consultas de alta velocidad para calcular ratios de vacantes por graduado, niveles salariales y demanda por región."
           }
         ],
-        "hallazgos": "1. <strong>Brecha Crítica de Empleabilidad:</strong> El análisis espacial reveló una desproporción de 1 vacante formal por cada 2,868 graduados en ciudades intermedias. <br><br> 2. <strong>Rendimiento de Ingesta OLAP:</strong> La transición de procesamiento relacional tradicional a DuckDB + Parquet redujo los tiempos de consulta analítica en un 85%.",
-        "label_dashboard": "Dashboard Analítico & Dashboard Power BI",
         "label_streamlit": "Dashboard Interactivo en Vivo (Streamlit)",
         "analisis": {
           "stats": [
-            { "valor": "1 : 2.868", "etiqueta": "Vacantes formales por cada graduado universitario en Colombia" },
-            { "valor": "+5.000", "etiqueta": "Vacantes analizadas a nivel nacional en 15 ciudades" },
-            { "valor": "85%", "etiqueta": "Reducción en tiempos de consulta vs. SQL relacional tradicional" },
-            { "valor": "Bogotá", "etiqueta": "Ciudad con mayor concentración de oferta laboral formal" },
-            { "valor": "Tecnología", "etiqueta": "Sector con mayor brecha entre oferta académica y demanda real" }
+            { "valor": "1 : 2.868", "etiqueta": "Ratio crítico: 1 vacante formal por cada 2.868 graduados universitarios" },
+            { "valor": "3M vs. 1.062", "etiqueta": "Graduados universitarios (SNIES) frente a vacantes formales analizadas" },
+            { "valor": "85%", "etiqueta": "Reducción en tiempos de consulta analítica (DuckDB + Parquet)" },
+            { "valor": "70%+", "etiqueta": "Concentración de la oferta en Bogotá, Medellín y Cali" },
+            { "valor": "Tecnología", "etiqueta": "Sector con mayor déficit de talento especializado" }
           ],
           "alertas_criticas": [
             {
-              "titulo": "Brecha Crítica de Empleabilidad Juvenil",
-              "texto": "El análisis revela una desproporción estructural: Colombia genera aproximadamente 3 millones de graduados universitarios pero solo dispone de 1.062 vacantes formales registradas por período analizado, resultando en una ratio de 1 oportunidad por cada 2.868 profesionales. Esta cifra no refleja solo desempleo, sino una desconexión sistémica entre el modelo educativo y las necesidades reales del mercado laboral, especialmente en ciudades intermedias como Cúcuta, Ibagué y Neiva donde la informalidad supera el 65%."
+              "titulo": "Brecha Estructural de Empleabilidad Juvenil",
+              "texto": "El análisis revela una desproporción crítica: Colombia registra un acumulado de más de 3 millones de graduados de educación superior (datos oficiales del SNIES) frente a apenas 1.062 vacantes formales consolidadas en el período de estudio, resultando en una ratio de 1 oportunidad por cada 2.868 profesionales. Este indicador evidencia una desconexión estructural entre los programas académicos ofertados y los requerimientos reales del sector productivo, agravada en ciudades intermedias donde la tasa de informalidad supera el 60%."
             },
             {
-              "titulo": "Concentración Geográfica de Oportunidades",
-              "texto": "Más del 70% de las vacantes formales se concentran en solo 3 ciudades: Bogotá, Medellín y Cali. Esto genera una migración forzada del talento profesional hacia los centros urbanos principales, vaciando de capital humano calificado a regiones como el Pacífico, la Orinoquía y el Caribe, perpetuando el ciclo de desigualdad territorial en el acceso al empleo de calidad."
+              "titulo": "Alta Centralización Territorial de Oportunidades",
+              "texto": "Más del 70% de las vacantes formales analizadas se concentran en las tres principales áreas metropolitanas (Bogotá, Medellín y Cali). Esta asimetría limita la movilidad laboral en regiones como el Pacífico, la Orinoquía y la Costa Caribe, forzando la migración del capital humano calificado hacia los grandes centros urbanos y profundizando las disparidades socioeconómicas regionales."
             }
           ],
           "alertas_positivas": [
             {
-              "titulo": "Sectores con Alta Demanda y Baja Oferta Académica",
-              "texto": "El pipeline identificó oportunidades no exploradas en sectores como Tecnología, Logística 4.0 y Agroindustria sostenible, donde la demanda de perfiles técnicos y tecnólogos supera la oferta de egresados en un 40%. Esto representa una ventana de empleabilidad inmediata para quienes adopten rutas de formación técnica corta alineadas con las necesidades del sector productivo."
+              "titulo": "Sectores de Alta Absorción y Oportunidad Inmediata",
+              "texto": "Se identificó una demanda no satisfecha en sectores como Tecnología, Logística y Operaciones Técnicas, donde los requisitos de perfil priorizan habilidades prácticas y certificaciones sobre títulos tradicionales. Esto abre una oportunidad directa de inserción laboral mediante rutas de capacitación técnica y vocacional enfocadas en habilidades de alta demanda."
             },
             {
-              "titulo": "Rendimiento del Pipeline ETL: DuckDB vs. Soluciones Tradicionales",
-              "texto": "La migración del almacenamiento a Apache Parquet con modelado dimensional en DuckDB redujo los tiempos de consulta analítica en un 85% frente al procesamiento relacional con BigQuery. La ingesta asíncrona con HTTPX procesó más de 5.000 registros en menos de 90 segundos, demostrando que arquitecturas data-native modernas son viables sin infraestructura cloud costosa."
+              "titulo": "Eficiencia y Rendimiento del Stack Técnico (v2.0)",
+              "texto": "La refactorización del proyecto desde scripts síncronos tradicionales hacia un pipeline moderno con HTTPX asíncrono, validación con Pydantic v2, almacenamiento columnar en Apache Parquet y DuckDB local redujo los tiempos de consulta analítica en un 85% y permitió desplegar el dashboard interactivo en Streamlit Cloud con costo de infraestructura $0."
             }
           ],
-          "conclusion": "Este proyecto demuestra que la crisis de empleabilidad en Colombia no es solo un problema de cantidad de empleos, sino de alineación estructural entre la oferta educativa masiva y las demandas específicas del mercado productivo. Con herramientas de Data Engineering modernas (DuckDB, dbt, Parquet, Streamlit) es posible construir sistemas de inteligencia laboral accesibles que permitan a instituciones educativas, policy makers y jóvenes profesionales tomar decisiones informadas. La siguiente fase del proyecto contempla integrar datos en tiempo real del DANE y el SENA para construir un índice de empleabilidad regional actualizado mensualmente."
+          "conclusion": "Este proyecto integra habilidades de Data Engineering y Data Analytics para transformar datos dispersos de empleo y educación en inteligencia accionable. Demuestra que la brecha laboral en Colombia requiere un enfoque basado en datos para alinear la política educativa con las demandas del mercado. Gracias a un stack moderno (Python, DuckDB, dbt, Parquet y Streamlit), se logró una solución analítica ligera, escalable y replicable para el monitoreo del mercado de trabajo."
         }
       },
       "streamlit_url": "https://j8bxcaexg4rtieuphcj46r.streamlit.app/",

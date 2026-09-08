@@ -315,6 +315,119 @@
             box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
         }
 
+        /* ── Sección Análisis de Resultados ─────────────────────────── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 24px 20px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.12);
+        }
+
+        .stat-card .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .insight-alert {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-left: 4px solid #ef4444;
+            border-radius: 0 var(--radius-card) var(--radius-card) 0;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .insight-alert .alert-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: #f87171;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insight-alert p {
+            color: var(--text-muted);
+            font-size: 0.97rem;
+            line-height: 1.7;
+        }
+
+        .insight-positive {
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            border-left: 4px solid var(--accent-emerald);
+            border-radius: 0 var(--radius-card) var(--radius-card) 0;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .insight-positive .alert-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--accent-emerald);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insight-positive p {
+            color: var(--text-muted);
+            font-size: 0.97rem;
+            line-height: 1.7;
+        }
+
+        .conclusion-card {
+            background: linear-gradient(135deg, rgba(56,189,248,0.06), rgba(192,132,252,0.06));
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            margin-top: 32px;
+        }
+
+        .conclusion-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--accent-purple);
+        }
+
+        .conclusion-card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.8;
+        }
+
         footer {
             border-top: 1px solid var(--border-color);
             padding: 40px 24px;
@@ -460,6 +573,51 @@
                                 loading="lazy"
                             ></iframe>
                         </div>
+                    ` : ''}
+
+                    ${b.analisis ? `
+                        <h2 class="section-title">
+                            <i data-lucide="search" style="color: var(--accent-purple);"></i>
+                            Análisis de Resultados & Contextualización
+                        </h2>
+
+                        ${b.analisis.stats ? `
+                            <div class="stats-grid">
+                                ${b.analisis.stats.map(s => `
+                                    <div class="stat-card">
+                                        <span class="stat-value">${s.valor}</span>
+                                        <span class="stat-label">${s.etiqueta}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        ${b.analisis.alertas_criticas ? b.analisis.alertas_criticas.map(a => `
+                            <div class="insight-alert">
+                                <div class="alert-title">
+                                    <i data-lucide="alert-triangle" style="width:18px;"></i>
+                                    ${a.titulo}
+                                </div>
+                                <p>${a.texto}</p>
+                            </div>
+                        `).join('') : ''}
+
+                        ${b.analisis.alertas_positivas ? b.analisis.alertas_positivas.map(a => `
+                            <div class="insight-positive">
+                                <div class="alert-title">
+                                    <i data-lucide="check-circle" style="width:18px;"></i>
+                                    ${a.titulo}
+                                </div>
+                                <p>${a.texto}</p>
+                            </div>
+                        `).join('') : ''}
+
+                        ${b.analisis.conclusion ? `
+                            <div class="conclusion-card">
+                                <h4>💡 Conclusión y Relevancia</h4>
+                                <p>${b.analisis.conclusion}</p>
+                            </div>
+                        ` : ''}
                     ` : ''}
                 `;
 

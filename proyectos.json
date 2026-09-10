@@ -193,6 +193,49 @@
       },
       "featured": true,
       "order": 3
+    },
+    {
+      "id": "app-web-portfolio",
+      "titulo": "Plataforma Web & Portafolio de Ingeniería de Datos",
+      "descripcion": "Arquitectura web moderna y estática diseñada para la presentación interactiva de proyectos de Data Analytics, dashboards de Power BI embebidos y procesamiento dinámico estructurado en JSON con despliegue continuo en Vercel.",
+      "github_repo": "Alejandro-78G/APP_Web-",
+      "thumbnail": "/static/images/projects/app_web_cover.png",
+      "stack_tecnico": [
+        "Python",
+        "FastAPI",
+        "Vercel",
+        "JavaScript ES6+",
+        "HTML5 / CSS3",
+        "JSON Data Engine",
+        "Git / GitHub Actions"
+      ],
+      "powerbi_embed_url": "",
+      "bloques": {
+        "problema": "Presentar proyectos analíticos complejos y dashboards interactivos de forma dinámica exige una plataforma web de alto rendimiento sin depender de servidores lentos que introduzcan tiempos de espera prolongados para reclutadores y clientes.",
+        "prologo_implementacion": "<h3>Arquitectura Web Estática y Despliegue CI/CD</h3><p>Diseño de un sistema de portafolio web basado en especificaciones GitSpec y arquitectura estática ultra-rápida (0.3s) integrada con Vercel CDN y sincronización continua desde GitHub.</p>",
+        "implementacion_lista": [
+          {
+            "titulo": "Despliegue Continuo en Vercel CDN",
+            "imagen": "/static/images/projects/app_web_cover.png",
+            "descripcion": "Integración de pipelines CI/CD con GitHub Actions y Vercel CLI para compilaciones y actualizaciones en tiempo real a nivel global."
+          },
+          {
+            "titulo": "Motor de Datos JSON Centralizado",
+            "imagen": "/static/images/projects/app_web_cover.png",
+            "descripcion": "Gestión dinámica de contenido mediante archivos JSON desacoplados (<code>config.json</code> y <code>proyectos.json</code>) para fácil actualización sin tocar código HTML."
+          },
+          {
+            "titulo": "UX/UI Glassmorphism y Filtros Dinámicos",
+            "imagen": "/static/images/projects/app_web_cover.png",
+            "descripcion": "Interfaz en modo oscuro inspirada en entornos de ingeniería de datos con filtrado dinámico en tiempo real por tecnologías y badges neón."
+          }
+        ],
+        "hallazgos": "1. <strong>Optimizacion de Carga:</strong> Carga de la plataforma en 0.3 segundos sin tiempos de espera de servidor. <br><br> 2. <strong>Experiencia de Usuario Senior:</strong> Sistema de diseño oscuro con glassmorphic cards, badges animados y botones de contacto directo en WhatsApp y CV en PDF.",
+        "label_dashboard": "Vista de la Plataforma Web",
+        "roadmap": "<ul><li><strong>Custom Subdomain:</strong> Vincular dominio propio personalizado.</li><li><strong>Analytics Metrics:</strong> Integración de métricas de visitas con Vercel Analytics.</li></ul>"
+      },
+      "featured": true,
+      "order": 4
     }
   ]
 }

@@ -215,19 +215,19 @@
         "prologo_implementacion": "<h3>Arquitectura Web Estática y Despliegue CI/CD</h3><p>Diseño de un sistema de portafolio web basado en especificaciones GitSpec y arquitectura estática ultra-rápida (0.3s) integrada con Vercel CDN y sincronización continua desde GitHub.</p>",
         "implementacion_lista": [
           {
-            "titulo": "Despliegue Continuo en Vercel CDN",
+            "titulo": "Interfaz de Usuario & Hero Section",
             "imagen": "/static/images/projects/app_web_cover.png",
-            "descripcion": "Integración de pipelines CI/CD con GitHub Actions y Vercel CLI para compilaciones y actualizaciones en tiempo real a nivel global."
+            "descripcion": "Diseño oscuro de nivel senior con insignia pulsante de estado ('Disponible para proyectos'), badges de habilidades y botones de acción directa para descargar CV en PDF y chat de WhatsApp."
+          },
+          {
+            "titulo": "Grilla de Proyectos & Filtros Dinámicos",
+            "imagen": "/static/images/projects/app_web_projects.png",
+            "descripcion": "Catálogo interactivo de proyectos con filtrado en tiempo real por tecnologías (Python, Power BI, SQL, NLP) y tarjetas glassmorphic con micro-animaciones al pasar el cursor."
           },
           {
             "titulo": "Motor de Datos JSON Centralizado",
             "imagen": "/static/images/projects/app_web_cover.png",
             "descripcion": "Gestión dinámica de contenido mediante archivos JSON desacoplados (<code>config.json</code> y <code>proyectos.json</code>) para fácil actualización sin tocar código HTML."
-          },
-          {
-            "titulo": "UX/UI Glassmorphism y Filtros Dinámicos",
-            "imagen": "/static/images/projects/app_web_cover.png",
-            "descripcion": "Interfaz en modo oscuro inspirada en entornos de ingeniería de datos con filtrado dinámico en tiempo real por tecnologías y badges neón."
           }
         ],
         "hallazgos": "1. <strong>Optimizacion de Carga:</strong> Carga de la plataforma en 0.3 segundos sin tiempos de espera de servidor. <br><br> 2. <strong>Experiencia de Usuario Senior:</strong> Sistema de diseño oscuro con glassmorphic cards, badges animados y botones de contacto directo en WhatsApp y CV en PDF.",
